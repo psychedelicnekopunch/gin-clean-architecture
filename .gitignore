@@ -1,0 +1,7 @@
+Config.go
+main
+
+/vendor
+/bin/config
+
+!.gitkeep
