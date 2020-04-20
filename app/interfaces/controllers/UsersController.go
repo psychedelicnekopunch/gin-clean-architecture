@@ -5,8 +5,8 @@ package controllers
 import (
 	"strconv"
 
-	"psychedelicnekopunch/gin-clean-architecture/api/app/interfaces/database"
-	"psychedelicnekopunch/gin-clean-architecture/api/app/usecase"
+	"github.com/psychedelicnekopunch/gin-clean-architecture/app/interfaces/database"
+	"github.com/psychedelicnekopunch/gin-clean-architecture/app/usecase"
 )
 
 

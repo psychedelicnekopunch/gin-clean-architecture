@@ -5,7 +5,7 @@ package database
 import (
 	"errors"
 
-	"psychedelicnekopunch/gin-clean-architecture/api/app/domain"
+	"github.com/psychedelicnekopunch/gin-clean-architecture/app/domain"
 )
 
 

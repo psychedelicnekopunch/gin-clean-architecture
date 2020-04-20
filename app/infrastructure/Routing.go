@@ -3,7 +3,7 @@ package infrastructure
 import (
 	"github.com/gin-gonic/gin"
 
-	"psychedelicnekopunch/gin-clean-architecture/api/app/interfaces/controllers"
+	"github.com/psychedelicnekopunch/gin-clean-architecture/app/interfaces/controllers"
 )
 
 type Routing struct {
