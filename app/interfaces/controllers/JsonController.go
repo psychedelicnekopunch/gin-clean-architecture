@@ -10,14 +10,14 @@ import (
 )
 
 
-type UsersController struct {
-	Interactor usecase.UserInteractor
+type JsonController struct {
+	Interactor usecase.JsonInteractor
 }
 
 
-func NewUsersController(db database.DB) *UsersController {
-	return &UsersController{
-		Interactor: usecase.UserInteractor{
+func NewJsonController(db database.DB) *JsonController {
+	return &JsonController{
+		Interactor: usecase.JsonInteractor{
 			DB: &database.DBRepository{ DB: db },
 			User: &database.UserRepository{},
 		},
@@ -25,7 +25,7 @@ func NewUsersController(db database.DB) *UsersController {
 }
 
 
-func (controller *UsersController) Get(c Context) {
+func (controller *JsonController) Get(c Context) {
 
 	id, _ := strconv.Atoi(c.Param("id"))
 
