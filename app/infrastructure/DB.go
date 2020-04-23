@@ -13,7 +13,7 @@ type DB struct {
 	Username string
 	Password string
 	DBName string
-	Connect *gorm.DB
+	Connection *gorm.DB
 }
 
 
@@ -45,11 +45,15 @@ func newDB(d *DB) *DB {
 	if err != nil {
 		panic(err.Error())
 	}
-	d.Connect = db
+	d.Connection = db
 	return d
 }
 
+// Begin begins a transaction
+func (db *DB) Begin() *gorm.DB {
+	return db.Connection.Begin()
+}
 
-func (db *DB) First(out interface{}, where ...interface{}) *gorm.DB {
-	return db.Connect.First(out, where...)
+func (db *DB) Connect() *gorm.DB {
+	return db.Connection
 }

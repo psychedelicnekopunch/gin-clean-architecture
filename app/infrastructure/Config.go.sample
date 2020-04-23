@@ -3,6 +3,9 @@ package infrastructure
 
 
 type Config struct {
+	Routing struct {
+		Port string
+	}
 	DB struct {
 		Production struct {
 			Host string
@@ -23,6 +26,8 @@ type Config struct {
 func NewConfig() *Config {
 
 	c := new(Config)
+
+	c.Routing.Port = ":8080"
 
 	c.DB.Production.Host = "localhost"
 	c.DB.Production.Username = "username"

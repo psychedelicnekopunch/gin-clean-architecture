@@ -7,5 +7,5 @@ import (
 func main() {
 	db := infrastructure.NewDB()
 	r := infrastructure.NewRouting(db)
-	r.Run(":8080")
+	r.Run()
 }

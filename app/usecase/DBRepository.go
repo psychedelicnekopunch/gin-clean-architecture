@@ -1,5 +1,5 @@
 
-package database
+package usecase
 
 
 import (
@@ -7,7 +7,7 @@ import (
 )
 
 
-type DB interface {
+type DBRepository interface {
 	Begin() *gorm.DB
 	Connect() *gorm.DB
 }

@@ -18,7 +18,8 @@ type UsersController struct {
 func NewUsersController(db database.DB) *UsersController {
 	return &UsersController{
 		Interactor: usecase.UserInteractor{
-			User: &database.UserRepository{ DB: db },
+			DB: &database.DBRepository{ DB: db },
+			User: &database.UserRepository{},
 		},
 	}
 }

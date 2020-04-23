@@ -9,12 +9,15 @@ import (
 type Routing struct {
 	DB *DB
 	Gin *gin.Engine
+	Port string
 }
 
 func NewRouting(db *DB) *Routing {
+	c := NewConfig()
 	r := &Routing{
 		DB: db,
 		Gin: gin.Default(),
+		Port: c.Routing.Port,
 	}
 	r.setRouting()
 	return r
@@ -25,6 +28,6 @@ func (r *Routing) setRouting() {
 	r.Gin.GET("/users/:id", func (c *gin.Context) { usersController.Get(c) })
 }
 
-func (r *Routing) Run(port string) {
-	r.Gin.Run(port)
+func (r *Routing) Run() {
+	r.Gin.Run(r.Port)
 }
