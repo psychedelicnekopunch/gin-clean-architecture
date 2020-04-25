@@ -26,7 +26,7 @@ func (controller *FormsController) Get(c Context) {
 
 
 func (controller *FormsController) Post(c Context) {
-	var params usecase.FormsParameters
+	var params usecase.FormParameters
 	c.ShouldBind(&params)
 	response, _ := controller.Interactor.Post(params)
 

@@ -10,11 +10,11 @@ type FormInteractor struct {
 type FormResponse struct {
 	Method string
 	Value string
-	Forms FormsParameters
+	Forms FormParameters
 }
 
 
-type FormsParameters struct {
+type FormParameters struct {
 	Value string `form:"value"`
 }
 
@@ -25,7 +25,7 @@ func (interactor *FormInteractor) Get() (response FormResponse, err error) {
 	return response, nil
 }
 
-func (interactor *FormInteractor) Post(params FormsParameters) (response FormResponse, err error) {
+func (interactor *FormInteractor) Post(params FormParameters) (response FormResponse, err error) {
 	response.Method = "POST"
 	response.Forms = params
 	interactor.StatusCode = 200
