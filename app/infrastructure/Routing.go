@@ -49,6 +49,7 @@ func (r *Routing) loadTemplates() {
 	r.Gin.LoadHTMLFiles(
 		"./app/interfaces/presenters/components/header.tmpl",
 		"./app/interfaces/presenters/index.tmpl",
+		"./app/interfaces/presenters/cookies/index.tmpl",
 		"./app/interfaces/presenters/forms/index.tmpl",
 		"./app/interfaces/presenters/templates/index.tmpl",
 		"./app/interfaces/presenters/templates/error.tmpl",
@@ -59,6 +60,7 @@ func (r *Routing) loadTemplates() {
 func (r *Routing) setRouting() {
 	indexController := controllers.NewIndexController()
 	jsonController := controllers.NewJsonController(r.DB)
+	cookiesController := controllers.NewCookiesController()
 	templatesController := controllers.NewTemplatesController(r.Http)
 	formsController := controllers.NewFormsController()
 
@@ -90,6 +92,9 @@ func (r *Routing) setRouting() {
 	 * View Sample
 	 */
 	r.Gin.GET("/templates", func (c *gin.Context) { templatesController.Get(c) })
+
+	r.Gin.GET("/cookies", func (c *gin.Context) { cookiesController.Get(c) })
+	r.Gin.POST("/cookies", func (c *gin.Context) { cookiesController.Post(c) })
 
 	r.Gin.GET("/forms", func (c *gin.Context) { formsController.Get(c) })
 	r.Gin.POST("/forms", func (c *gin.Context) { formsController.Post(c) })

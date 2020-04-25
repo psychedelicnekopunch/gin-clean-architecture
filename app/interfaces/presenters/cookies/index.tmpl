@@ -1,0 +1,26 @@
+{{ define "cookies/index.tmpl" }}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>psychedelicnekopunch/gin-clean-architecture</title>
+</head>
+<body>
+	<a href="/">← top</a><br>
+
+	cookies/index<br>
+
+	<form action="" method="POST">
+		<input type="text" name="value" value="{{ .Forms.Value }}" placeholder="name is value"><br>
+		<button type="submit">submit</button>
+	</form>
+
+	<hr>
+
+	Cookie: {{ .CookieValue }}
+
+</body>
+</html>
+
+{{ end }}
