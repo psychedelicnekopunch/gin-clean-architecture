@@ -6,6 +6,7 @@ import (
 
 func main() {
 	db := infrastructure.NewDB()
-	r := infrastructure.NewRouting(db)
+	http := infrastructure.NewHttp()
+	r := infrastructure.NewRouting(db, http)
 	r.Run()
 }

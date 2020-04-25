@@ -1,0 +1,31 @@
+{{ define "templates/index.tmpl" }}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>psychedelicnekopunch/gin-clean-architecture</title>
+</head>
+<body>
+	{{ template "components/header.tmpl" }}
+
+	templates/index<hr>
+
+	{{ .Lists | len }} items<hr>
+	{{ range $i, $list := .Lists }}
+
+		{{ $item := index $.Lists 0 }}
+
+		$item.Name is {{ $item.Name }}<br>
+		index: {{ $i }}
+		{{ if eq $i 10 }}
+			!!!!!
+		{{ end }}
+		<br>
+		<time>{{ $list.CreatedAt | formatedDate }}</time><br>
+		{{ $list.Name }} <small>(ID: {{ $list.ID }})</small><hr>
+	{{ end }}
+</body>
+</html>
+
+{{ end }}

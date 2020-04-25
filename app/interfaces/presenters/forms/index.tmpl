@@ -1,0 +1,27 @@
+{{ define "forms/index.tmpl" }}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>psychedelicnekopunch/gin-clean-architecture</title>
+</head>
+<body>
+	<a href="/">← top</a><br>
+
+	forms/index<br>
+
+	Method: {{ .Method | test }}<hr>
+	<form action="" method="POST">
+		<input type="text" name="value" value="{{ .Forms.Value }}" placeholder="name is value"><br>
+		<button type="submit">submit</button>
+	</form>
+
+	<hr>
+
+	{{ .Forms.Value }}
+
+</body>
+</html>
+
+{{ end }}
