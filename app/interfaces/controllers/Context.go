@@ -3,6 +3,7 @@ package controllers
 
 
 type Context interface {
+	Query(key string) string
 	Param(key string) string
 	JSON(code int, obj interface{})
 	HTML(code int, name string, obj interface{})
