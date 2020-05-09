@@ -45,6 +45,9 @@ func (r *Routing) loadTemplates() {
 		"test": func (s string) string {
 			return s + " : filter success"
 		},
+		"sinitize": func (s string) template.HTML {
+			return template.HTML(s)
+		},
 	})
 	r.Gin.LoadHTMLFiles(
 		"./app/interfaces/presenters/components/header.tmpl",
