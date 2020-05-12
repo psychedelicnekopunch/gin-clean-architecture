@@ -18,6 +18,7 @@ type Routing struct {
 	Http *Http
 	Gin *gin.Engine
 	Port string
+	AbsolutePath string
 }
 
 
@@ -28,6 +29,7 @@ func NewRouting(db *DB, http *Http) *Routing {
 		Http: http,
 		Gin: gin.Default(),
 		Port: c.Routing.Port,
+		AbsolutePath: c.AbsolutePath,
 	}
 	r.loadTemplates()
 	r.setRouting()
@@ -36,6 +38,10 @@ func NewRouting(db *DB, http *Http) *Routing {
 
 
 func (r *Routing) loadTemplates() {
+
+	r.Gin.Static("/css", r.AbsolutePath + "/assets/css")
+	r.Gin.Static("/js", r.AbsolutePath + "/assets/js")
+
 	// 順番大事 フィルター定義 (SetFuncMap()) → テンプレート読込み (LoadHTMLFiles())
 	r.Gin.SetFuncMap(template.FuncMap{
 		"formatedDate": func (t time.Time) string {
@@ -50,13 +56,14 @@ func (r *Routing) loadTemplates() {
 		},
 	})
 	r.Gin.LoadHTMLFiles(
-		"./app/interfaces/presenters/components/header.tmpl",
-		"./app/interfaces/presenters/components/repos.tmpl",
-		"./app/interfaces/presenters/index.tmpl",
-		"./app/interfaces/presenters/cookies/index.tmpl",
-		"./app/interfaces/presenters/forms/index.tmpl",
-		"./app/interfaces/presenters/templates/index.tmpl",
-		"./app/interfaces/presenters/templates/error.tmpl",
+		r.AbsolutePath + "/app/interfaces/presenters/components/header.tmpl",
+		r.AbsolutePath + "/app/interfaces/presenters/components/repos.tmpl",
+		r.AbsolutePath + "/app/interfaces/presenters/index.tmpl",
+		r.AbsolutePath + "/app/interfaces/presenters/assets/index.tmpl",
+		r.AbsolutePath + "/app/interfaces/presenters/cookies/index.tmpl",
+		r.AbsolutePath + "/app/interfaces/presenters/forms/index.tmpl",
+		r.AbsolutePath + "/app/interfaces/presenters/templates/index.tmpl",
+		r.AbsolutePath + "/app/interfaces/presenters/templates/error.tmpl",
 	)
 }
 
@@ -67,6 +74,7 @@ func (r *Routing) setRouting() {
 	cookiesController := controllers.NewCookiesController()
 	templatesController := controllers.NewTemplatesController(r.Http)
 	formsController := controllers.NewFormsController()
+	assetsController := controllers.NewAssetsController()
 
 	r.Gin.GET("/", func (c *gin.Context) { indexController.Get(c) })
 
@@ -102,6 +110,8 @@ func (r *Routing) setRouting() {
 
 	r.Gin.GET("/forms", func (c *gin.Context) { formsController.Get(c) })
 	r.Gin.POST("/forms", func (c *gin.Context) { formsController.Post(c) })
+
+	r.Gin.GET("/assets", func (c *gin.Context) { assetsController.Get(c) })
 }
 
 

@@ -20,6 +20,7 @@ type Config struct {
 			DBName string
 		}
 	}
+	AbsolutePath string
 }
 
 
@@ -38,6 +39,8 @@ func NewConfig() *Config {
 	c.DB.Test.Username = "username"
 	c.DB.Test.Password = "password"
 	c.DB.Test.DBName = "db_name_test"
+
+	c.AbsolutePath = "/path/to/your/project"
 
 	return c
 }
