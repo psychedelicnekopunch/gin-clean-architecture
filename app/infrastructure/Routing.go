@@ -51,6 +51,7 @@ func (r *Routing) loadTemplates() {
 	})
 	r.Gin.LoadHTMLFiles(
 		"./app/interfaces/presenters/components/header.tmpl",
+		"./app/interfaces/presenters/components/repos.tmpl",
 		"./app/interfaces/presenters/index.tmpl",
 		"./app/interfaces/presenters/cookies/index.tmpl",
 		"./app/interfaces/presenters/forms/index.tmpl",
