@@ -88,6 +88,7 @@ func (r *Routing) setRouting() {
 	formsController := controllers.NewFormsController()
 	assetsController := controllers.NewAssetsController()
 	markdownController := controllers.NewMarkdownController()
+	redirectController := controllers.NewRedirectController()
 
 	r.Gin.GET("/", func (c *gin.Context) { indexController.Get(c) })
 
@@ -127,6 +128,8 @@ func (r *Routing) setRouting() {
 	r.Gin.GET("/assets", func (c *gin.Context) { assetsController.Get(c) })
 
 	r.Gin.GET("/markdown", func (c *gin.Context) { markdownController.Get(c) })
+
+	r.Gin.GET("/redirect", func (c *gin.Context) { redirectController.Get(c) })
 }
 
 
