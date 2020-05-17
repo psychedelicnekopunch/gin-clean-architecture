@@ -8,6 +8,8 @@ import (
 	"html/template"
 
 	"github.com/gin-gonic/gin"
+	"github.com/microcosm-cc/bluemonday"
+	"gopkg.in/russross/blackfriday.v2"
 
 	"github.com/psychedelicnekopunch/gin-clean-architecture/app/interfaces/controllers"
 )
@@ -48,12 +50,21 @@ func (r *Routing) loadTemplates() {
 			year, month, day := t.Date()
 			return fmt.Sprintf("%d/%02d/%02d", year, month, day)
 		},
+		"md": func (s string) template.HTML {
+			renderer := blackfriday.NewHTMLRenderer(blackfriday.HTMLRendererParameters{
+				Flags: blackfriday.HrefTargetBlank,
+			})
+			output := blackfriday.Run([]byte(s), blackfriday.WithExtensions(blackfriday.HardLineBreak + blackfriday.Autolink), blackfriday.WithRenderer(renderer))
+			html := bluemonday.UGCPolicy().SanitizeBytes(output)
+			return template.HTML(string(html))
+		},
 		"test": func (s string) string {
 			return s + " : filter success"
 		},
 		"sinitize": func (s string) template.HTML {
 			return template.HTML(s)
 		},
+
 	})
 	r.Gin.LoadHTMLFiles(
 		r.AbsolutePath + "/app/interfaces/presenters/components/header.tmpl",
@@ -62,6 +73,7 @@ func (r *Routing) loadTemplates() {
 		r.AbsolutePath + "/app/interfaces/presenters/assets/index.tmpl",
 		r.AbsolutePath + "/app/interfaces/presenters/cookies/index.tmpl",
 		r.AbsolutePath + "/app/interfaces/presenters/forms/index.tmpl",
+		r.AbsolutePath + "/app/interfaces/presenters/markdown/index.tmpl",
 		r.AbsolutePath + "/app/interfaces/presenters/templates/index.tmpl",
 		r.AbsolutePath + "/app/interfaces/presenters/templates/error.tmpl",
 	)
@@ -75,6 +87,7 @@ func (r *Routing) setRouting() {
 	templatesController := controllers.NewTemplatesController(r.Http)
 	formsController := controllers.NewFormsController()
 	assetsController := controllers.NewAssetsController()
+	markdownController := controllers.NewMarkdownController()
 
 	r.Gin.GET("/", func (c *gin.Context) { indexController.Get(c) })
 
@@ -112,6 +125,8 @@ func (r *Routing) setRouting() {
 	r.Gin.POST("/forms", func (c *gin.Context) { formsController.Post(c) })
 
 	r.Gin.GET("/assets", func (c *gin.Context) { assetsController.Get(c) })
+
+	r.Gin.GET("/markdown", func (c *gin.Context) { markdownController.Get(c) })
 }
 
 

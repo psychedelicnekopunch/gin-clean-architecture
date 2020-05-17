@@ -1,0 +1,19 @@
+{{ define "markdown/index.tmpl" }}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>psychedelicnekopunch/gin-clean-architecture</title>
+</head>
+<body>
+	<a href="/">← top</a><br>
+
+	markdown/index<br>
+
+	{{ .Value | md }}
+
+</body>
+</html>
+
+{{ end }}
