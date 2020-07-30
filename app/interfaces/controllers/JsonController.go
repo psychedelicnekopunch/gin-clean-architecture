@@ -29,10 +29,10 @@ func (controller *JsonController) Get(c Context) {
 
 	id, _ := strconv.Atoi(c.Param("id"))
 
-	user, err := controller.Interactor.Get(id)
-	if err != nil {
-		c.JSON(controller.Interactor.StatusCode, NewH(err.Error(), nil))
+	user, res := controller.Interactor.Get(id)
+	if res.Error != nil {
+		c.JSON(res.StatusCode, NewH(res.Error.Error(), nil))
 		return
 	}
-	c.JSON(controller.Interactor.StatusCode, NewH("success", user))
+	c.JSON(res.StatusCode, NewH("success", user))
 }

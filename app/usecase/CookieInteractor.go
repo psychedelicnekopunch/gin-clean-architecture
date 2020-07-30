@@ -7,9 +7,7 @@ import (
 )
 
 
-type CookieInteractor struct {
-	StatusCode int
-}
+type CookieInteractor struct {}
 
 
 type CookieResponse struct {
@@ -23,21 +21,18 @@ type CookieParameters struct {
 }
 
 
-func (interactor *CookieInteractor) Get(cookie string) (response CookieResponse, err error) {
+func (interactor *CookieInteractor) Get(cookie string) (response CookieResponse, resultStatus *ResultStatus) {
 	response.CookieValue = cookie
-	interactor.StatusCode = 200
-	return response, nil
+	return response, NewResultStatus(200, nil)
 }
 
 
-func (interactor *CookieInteractor) Post(cookie string, params CookieParameters) (response CookieResponse, err error) {
+func (interactor *CookieInteractor) Post(cookie string, params CookieParameters) (response CookieResponse, resultStatus *ResultStatus) {
 	response.CookieValue = cookie
 	response.Forms = params
 	if response.Forms.Value == "" {
-		interactor.StatusCode = 400
-		return response, errors.New("value is empty")
+		return response, NewResultStatus(400, errors.New("value is empty"))
 	}
 	response.CookieValue = response.Forms.Value
-	interactor.StatusCode = 200
-	return response, nil
+	return response, NewResultStatus(200, nil)
 }

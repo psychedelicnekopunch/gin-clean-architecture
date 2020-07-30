@@ -20,6 +20,6 @@ func NewMarkdownController() *MarkdownController {
 
 
 func (controller *MarkdownController) Get(c Context) {
-	response, _ := controller.Interactor.Get()
-	c.HTML(controller.Interactor.StatusCode, "markdown/index.tmpl", response)
+	response, res := controller.Interactor.Get()
+	c.HTML(res.StatusCode, "markdown/index.tmpl", response)
 }

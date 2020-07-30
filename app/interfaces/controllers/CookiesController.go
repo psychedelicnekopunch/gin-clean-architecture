@@ -21,8 +21,8 @@ func NewCookiesController() *CookiesController {
 
 func (controller *CookiesController) Get(c Context) {
 	cookie, _ := c.Cookie("value")
-	response, _ := controller.Interactor.Get(cookie)
-	c.HTML(controller.Interactor.StatusCode, "cookies/index.tmpl", response)
+	response, res := controller.Interactor.Get(cookie)
+	c.HTML(res.StatusCode, "cookies/index.tmpl", response)
 }
 
 
@@ -30,11 +30,11 @@ func (controller *CookiesController) Post(c Context) {
 	cookie, _ := c.Cookie("value")
 	var params usecase.CookieParameters
 	c.ShouldBind(&params)
-	response, err := controller.Interactor.Post(cookie, params)
+	response, res := controller.Interactor.Post(cookie, params)
 
-	if err == nil {
+	if res.Error == nil {
 		c.SetCookie("value", response.CookieValue, 60*60*24*365, "/", "", false, true)
 	}
 
-	c.HTML(controller.Interactor.StatusCode, "cookies/index.tmpl", response)
+	c.HTML(res.StatusCode, "cookies/index.tmpl", response)
 }

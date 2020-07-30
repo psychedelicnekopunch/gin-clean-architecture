@@ -2,17 +2,12 @@
 package usecase
 
 
-type AssetInteractor struct {
-	StatusCode int
-}
+type AssetInteractor struct {}
 
 
-type AssetResponse struct {
-
-}
+type AssetResponse struct {}
 
 
-func (interactor *AssetInteractor) Get() (response AssetResponse, err error) {
-	interactor.StatusCode = 200
-	return response, nil
+func (interactor *AssetInteractor) Get() (response AssetResponse, resultStatus *ResultStatus) {
+	return response, NewResultStatus(200, nil)
 }

@@ -2,9 +2,7 @@
 package usecase
 
 
-type FormInteractor struct {
-	StatusCode int
-}
+type FormInteractor struct {}
 
 
 type FormResponse struct {
@@ -19,15 +17,13 @@ type FormParameters struct {
 }
 
 
-func (interactor *FormInteractor) Get() (response FormResponse, err error) {
+func (interactor *FormInteractor) Get() (response FormResponse, resultStatus *ResultStatus) {
 	response.Method = "GET"
-	interactor.StatusCode = 200
-	return response, nil
+	return response, NewResultStatus(200, nil)
 }
 
-func (interactor *FormInteractor) Post(params FormParameters) (response FormResponse, err error) {
+func (interactor *FormInteractor) Post(params FormParameters) (response FormResponse, resultStatus *ResultStatus) {
 	response.Method = "POST"
 	response.Forms = params
-	interactor.StatusCode = 200
-	return response, nil
+	return response, NewResultStatus(200, nil)
 }

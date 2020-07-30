@@ -20,6 +20,6 @@ func NewAssetsController() *AssetsController {
 
 
 func (controller *AssetsController) Get(c Context) {
-	response, _ := controller.Interactor.Get()
-	c.HTML(controller.Interactor.StatusCode, "assets/index.tmpl", response)
+	response, res := controller.Interactor.Get()
+	c.HTML(res.StatusCode, "assets/index.tmpl", response)
 }

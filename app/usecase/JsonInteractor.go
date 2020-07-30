@@ -10,19 +10,16 @@ import (
 type JsonInteractor struct {
 	DB DBRepository
 	User UserRepository
-	StatusCode int
 }
 
 
-func (interactor *JsonInteractor) Get(id int) (user domain.UsersForGet, err error) {
+func (interactor *JsonInteractor) Get(id int) (user domain.UsersForGet, resultStatus *ResultStatus) {
 	db := interactor.DB.Connect()
 	// Users の取得
 	foundUser, err := interactor.User.FindByID(db, id)
 	if err != nil {
-		interactor.StatusCode = 404
-		return domain.UsersForGet{}, err
+		return domain.UsersForGet{},NewResultStatus(404, err)
 	}
 	user = foundUser.BuildForGet()
-	interactor.StatusCode = 200
-	return user, nil
+	return user, NewResultStatus(200, nil)
 }

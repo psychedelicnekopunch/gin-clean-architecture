@@ -23,10 +23,10 @@ func NewTemplatesController(http database.Http) *TemplatesController {
 
 
 func (controller *TemplatesController) Get(c Context) {
-	response, err := controller.Interactor.Get()
-	if err != nil {
-		c.HTML(controller.Interactor.StatusCode, "templates/error.tmpl", response)
+	response, res := controller.Interactor.Get()
+	if res.Error != nil {
+		c.HTML(res.StatusCode, "templates/error.tmpl", response)
 		return
 	}
-	c.HTML(controller.Interactor.StatusCode, "templates/index.tmpl", response)
+	c.HTML(res.StatusCode, "templates/index.tmpl", response)
 }

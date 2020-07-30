@@ -2,9 +2,7 @@
 package usecase
 
 
-type MarkdownInteractor struct {
-	StatusCode int
-}
+type MarkdownInteractor struct {}
 
 
 type MarkdownResponse struct {
@@ -12,7 +10,7 @@ type MarkdownResponse struct {
 }
 
 
-func (interactor *MarkdownInteractor) Get() (response MarkdownResponse, err error) {
+func (interactor *MarkdownInteractor) Get() (response MarkdownResponse, resultStatus *ResultStatus) {
 	response.Value = `
 ## title
 
@@ -24,6 +22,5 @@ func (interactor *MarkdownInteractor) Get() (response MarkdownResponse, err erro
 
 https://github.com/psychedelicnekopunch/gin-clean-architecture
 `
-	interactor.StatusCode = 200
-	return response, nil
+	return response, NewResultStatus(200, nil)
 }

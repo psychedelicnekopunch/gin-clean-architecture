@@ -9,7 +9,6 @@ import (
 
 type TemplateInteractor struct {
 	Github GithubRepository
-	StatusCode int
 }
 
 
@@ -19,7 +18,7 @@ type TemplateResponse struct {
 }
 
 
-func (interactor *TemplateInteractor) Get() (response TemplateResponse, err error) {
+func (interactor *TemplateInteractor) Get() (response TemplateResponse, resultStatus *ResultStatus) {
 
 	params := map[string]string{}
 	params["sort"] = "created"
@@ -29,14 +28,12 @@ func (interactor *TemplateInteractor) Get() (response TemplateResponse, err erro
 
 	if err != nil {
 		response.ErrorMessage = err.Error()
-		interactor.StatusCode = 400
-		return response, err
+		return response, NewResultStatus(400, err)
 	}
 
 	for _, repo := range repos {
 		response.Lists = append(response.Lists, repo.BuildForGet())
 	}
 
-	interactor.StatusCode = 200
-	return response, nil
+	return response, NewResultStatus(200, nil)
 }
