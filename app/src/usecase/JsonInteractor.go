@@ -3,7 +3,7 @@ package usecase
 
 
 import (
-	"github.com/psychedelicnekopunch/gin-clean-architecture/app/domain"
+	"github.com/psychedelicnekopunch/gin-clean-architecture/src/domain"
 )
 
 

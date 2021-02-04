@@ -3,7 +3,7 @@ package controllers
 
 
 import (
-	"github.com/psychedelicnekopunch/gin-clean-architecture/app/usecase"
+	"github.com/psychedelicnekopunch/gin-clean-architecture/src/usecase"
 )
 
 

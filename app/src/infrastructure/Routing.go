@@ -11,7 +11,7 @@ import (
 	"github.com/microcosm-cc/bluemonday"
 	"gopkg.in/russross/blackfriday.v2"
 
-	"github.com/psychedelicnekopunch/gin-clean-architecture/app/interfaces/controllers"
+	"github.com/psychedelicnekopunch/gin-clean-architecture/src/interfaces/controllers"
 )
 
 
@@ -67,15 +67,15 @@ func (r *Routing) loadTemplates() {
 
 	})
 	r.Gin.LoadHTMLFiles(
-		r.AbsolutePath + "/app/interfaces/presenters/components/header.tmpl",
-		r.AbsolutePath + "/app/interfaces/presenters/components/repos.tmpl",
-		r.AbsolutePath + "/app/interfaces/presenters/index.tmpl",
-		r.AbsolutePath + "/app/interfaces/presenters/assets/index.tmpl",
-		r.AbsolutePath + "/app/interfaces/presenters/cookies/index.tmpl",
-		r.AbsolutePath + "/app/interfaces/presenters/forms/index.tmpl",
-		r.AbsolutePath + "/app/interfaces/presenters/markdown/index.tmpl",
-		r.AbsolutePath + "/app/interfaces/presenters/templates/index.tmpl",
-		r.AbsolutePath + "/app/interfaces/presenters/templates/error.tmpl",
+		r.AbsolutePath + "/src/interfaces/presenters/components/header.tmpl",
+		r.AbsolutePath + "/src/interfaces/presenters/components/repos.tmpl",
+		r.AbsolutePath + "/src/interfaces/presenters/index.tmpl",
+		r.AbsolutePath + "/src/interfaces/presenters/assets/index.tmpl",
+		r.AbsolutePath + "/src/interfaces/presenters/cookies/index.tmpl",
+		r.AbsolutePath + "/src/interfaces/presenters/forms/index.tmpl",
+		r.AbsolutePath + "/src/interfaces/presenters/markdown/index.tmpl",
+		r.AbsolutePath + "/src/interfaces/presenters/templates/index.tmpl",
+		r.AbsolutePath + "/src/interfaces/presenters/templates/error.tmpl",
 	)
 }
 

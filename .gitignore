@@ -1,6 +1,10 @@
+.DS_Store
+
+mysql
+
 Config.go
 main
 
-/bin/config
+app/bin/config
 
 !.gitkeep

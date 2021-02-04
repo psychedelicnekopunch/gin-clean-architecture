@@ -7,7 +7,7 @@ import (
 
 	"github.com/jinzhu/gorm"
 
-	"github.com/psychedelicnekopunch/gin-clean-architecture/app/domain"
+	"github.com/psychedelicnekopunch/gin-clean-architecture/src/domain"
 )
 
 

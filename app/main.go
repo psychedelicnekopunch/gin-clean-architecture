@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/psychedelicnekopunch/gin-clean-architecture/app/infrastructure"
+	"github.com/psychedelicnekopunch/gin-clean-architecture/src/infrastructure"
 )
 
 func main() {
