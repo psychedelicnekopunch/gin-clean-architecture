@@ -6,5 +6,6 @@ Config.go
 main
 
 app/bin/config
+app/tmp/*
 
 !.gitkeep

@@ -89,6 +89,7 @@ func (r *Routing) setRouting() {
 	assetsController := controllers.NewAssetsController()
 	markdownController := controllers.NewMarkdownController()
 	redirectController := controllers.NewRedirectController()
+	dividesController := controllers.NewDividesController()
 
 	r.Gin.GET("/", func (c *gin.Context) { indexController.Get(c) })
 
@@ -130,6 +131,8 @@ func (r *Routing) setRouting() {
 	r.Gin.GET("/markdown", func (c *gin.Context) { markdownController.Get(c) })
 
 	r.Gin.GET("/redirect", func (c *gin.Context) { redirectController.Get(c) })
+
+	r.Gin.GET("/divides/:id", func (c *gin.Context) { dividesController.Get(c) })
 }
 
 
