@@ -2,9 +2,8 @@
 version: "3"
 
 services:
-    app:
-        build:
-            context: .
+    gin-clean-architecture-app:
+        image: nginx:1.27.0-perl
         volumes:
             - ./app:/var/www/html
             - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
@@ -12,9 +11,17 @@ services:
             - 8080:80
         # tty: true
         depends_on:
-            - mysql
-            - phpmyadmin
-    mysql:
+            - gin-clean-architecture-go
+            - gin-clean-architecture-mysql
+            - gin-clean-architecture-phpmyadmin
+    gin-clean-architecture-go:
+        build:
+            context: .
+            dockerfile: ./go/Dockerfile
+        volumes:
+            - ./app:/var/www/html
+        working_dir: /var/www/html
+    gin-clean-architecture-mysql:
         image: mysql:8
         restart: always
         environment:
@@ -22,10 +29,13 @@ services:
             TZ: 'Asia/Tokyo'
         volumes:
             - ./mysql:/var/lib/mysql
-    phpmyadmin:
+    gin-clean-architecture-phpmyadmin:
         image: phpmyadmin:5
         restart: always
         ports:
             - 8081:80
         environment:
-            - PMA_ARBITRARY=1
+            # - PMA_ARBITRARY=1
+            - PMA_HOST=gin-clean-architecture-mysql
+            - PMA_USER=root
+            - PMA_PASSWORD=password

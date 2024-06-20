@@ -30,17 +30,17 @@ func NewConfig() *Config {
 
 	c.Routing.Port = ":8080"
 
-	c.DB.Production.Host = "localhost"
-	c.DB.Production.Username = "username"
+	c.DB.Production.Host = "gin-clean-architecture-mysql"
+	c.DB.Production.Username = "root"
 	c.DB.Production.Password = "password"
-	c.DB.Production.DBName = "db_name"
+	c.DB.Production.DBName = "test"
 
-	c.DB.Test.Host = "localhost"
-	c.DB.Test.Username = "username"
+	c.DB.Test.Host = "mysql"
+	c.DB.Test.Username = "root"
 	c.DB.Test.Password = "password"
-	c.DB.Test.DBName = "db_name_test"
+	c.DB.Test.DBName = "test_test"
 
-	c.AbsolutePath = "/path/to/your/project"
+	c.AbsolutePath = "/var/www/html"
 
 	return c
 }
